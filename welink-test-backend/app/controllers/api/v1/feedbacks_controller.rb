@@ -4,6 +4,12 @@ class Api::V1::FeedbacksController < ApplicationController
   end
 
   def create
+    if user.id
+      user.update(user_params)
+    else
+      user.assign_attributes(user_params)
+    end
+
     if user.save
       new_feedback = Feedback.new(body: feedback_params[:body])
       user.feedbacks << new_feedback
@@ -16,13 +22,7 @@ class Api::V1::FeedbacksController < ApplicationController
   private
 
   def user
-    user = User.find_or_initialize_by(email: user_params[:email])
-    if user.id
-      user.update(user_params)
-    else
-      user.assign_attributes(user_params)
-    end
-    user
+    @user ||= User.find_or_initialize_by(email: user_params[:email])
   end
 
   def user_params
@@ -95,7 +95,7 @@ class Api::V1::FeedbacksController < ApplicationController
   end
 
   def pagination_params?
-    pagination_index.present? && pagination_attribute.present?
+    pagination_index.present? && pagination_items.present?
   end
 
   def seach_params
