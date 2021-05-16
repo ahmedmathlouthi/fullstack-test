@@ -1,0 +1,31 @@
+# dependencies
+welink-test-frontend/node_modules
+welink-test-frontend/.pnp
+welink-test-frontend/.pnp.js
+# testing
+welink-test-frontend/coverage
+# production
+welink-test-frontend//build
+# misc
+welink-test-frontend/.DS_Store
+welink-test-frontend/.env.local
+welink-test-frontend/.env.development.local
+welink-test-frontend/.env.test.local
+welink-test-frontend/.env.production.local
+welink-test-frontend/npm-debug.log*
+welink-test-frontend/yarn-debug.log*
+welink-test-frontend/yarn-error.log*
+
+# Ignore bundler config.
+welink-test-backend/.bundle
+# Ignore all logfiles and tempfiles.
+welink-test-backend/log/*
+welink-test-backend/tmp/*
+welink-test-backend!/log/.keep
+welink-test-backend!/tmp/.keep
+# Ignore uploaded files in development.
+welink-test-backend/storage/*
+welink-test-backend!/storage/.keep
+welink-test-backend.byebug_history
+# Ignore master key for decrypting credentials and more.
+welink-test-backend/config/master.key
