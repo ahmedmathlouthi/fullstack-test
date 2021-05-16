@@ -4,16 +4,34 @@ class Api::V1::FeedbacksController < ApplicationController
   end
 
   def create
-    if user.nil?
-      render json: { message: 'user not found' }
+    if user.save
+      new_feedback = Feedback.new(body: feedback_params[:body])
+      user.feedbacks << new_feedback
+      render json: user, status: :ok, serializer: Api::V1::UserSerializer
     else
-      feedback = Feedback.create(feedback_params)
-      user.feedbacks << feedback
-      render json: feedback, status: :ok, serializer: Api::V1::FeedbackSerializer
+      render json: { message: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   private
+
+  def user
+    user = User.find_or_initialize_by(email: user_params[:email])
+    if user.id
+      user.update(user_params)
+    else
+      user.assign_attributes(user_params)
+    end
+    user
+  end
+
+  def user_params
+    {
+      firstname: feedback_params[:user][:firstname],
+      lastname: feedback_params[:user][:lastname],
+      email: feedback_params[:user][:email]
+    }
+  end
 
   def paginated_feedbacks
     return feedbacks_selection unless pagination_items.nonzero?
@@ -25,6 +43,10 @@ class Api::V1::FeedbacksController < ApplicationController
 
   def feedbacks_selection
     @feedbacks_selection ||= filter_params? ? seached_feedbacks : last_feedbacks
+  end
+
+  def last_feedbacks
+    @last_feedbacks ||= all_feedbacks.take(10)
   end
 
   def seached_feedbacks
@@ -43,13 +65,9 @@ class Api::V1::FeedbacksController < ApplicationController
   def seached_users
     return all_users unless seach_params.present?
 
-    @seached_users ||= all_users.where(firstname: seach_params)
-                                .or(User.where(lastname: seach_params))
-                                .or(User.where(email: seach_params))
-  end
-
-  def last_feedbacks
-    @last_feedbacks ||= all_feedbacks.take(10)
+    @seached_users ||= all_users.where('firstname  ~* ?', seach_params)
+                                .or(User.where('lastname  ~* ?', seach_params))
+                                .or(User.where('email  ~* ?', seach_params))
   end
 
   def all_feedbacks
@@ -64,24 +82,20 @@ class Api::V1::FeedbacksController < ApplicationController
     @feedback ||= Feedback.find_by(id: params[:id])
   end
 
-  def user
-    @user ||= User.find(params[:user_id])
-  end
-
-  def feedback_params
-    params.require(:feedback).permit(:body)
-  end
+  # def user
+  #   @user ||= User.find(params[:user_id])
+  # end
 
   def filter_params?
-    seach_params || order_params? || pagination_params?
+    seach_params.present? || order_params? || pagination_params?
   end
 
   def order_params?
-    order && order_attribute
+    order.present? && order_attribute.present?
   end
 
   def pagination_params?
-    pagination_index && pagination_attribute
+    pagination_index.present? && pagination_attribute.present?
   end
 
   def seach_params
@@ -102,5 +116,9 @@ class Api::V1::FeedbacksController < ApplicationController
 
   def pagination_items
     @pagination_items ||= params[:n].to_i
+  end
+
+  def feedback_params
+    params.permit(:body, user: %i[firstname lastname email])
   end
 end
