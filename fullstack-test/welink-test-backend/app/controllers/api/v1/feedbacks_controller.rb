@@ -9,13 +9,14 @@ class Api::V1::FeedbacksController < ApplicationController
     else
       user.assign_attributes(user_params)
     end
+    
+    new_feedback = Feedback.new(body: feedback_params[:body], user: user)
 
-    if user.save
-      new_feedback = Feedback.new(body: feedback_params[:body])
-      user.feedbacks << new_feedback
-      render json: user, status: :ok, serializer: Api::V1::UserSerializer
+    if new_feedback.save && user.save
+      # user.feedbacks << new_feedback
+      render json: new_feedback, status: :ok, serializer: Api::V1::FeedbackSerializer
     else
-      render json: { message: user.errors.full_messages }, status: :unprocessable_entity
+      render json: { message: "#{new_feedback.errors.full_messages} #{user.errors.full_messages}" }, status: :unprocessable_entity
     end
   end
 
@@ -81,10 +82,6 @@ class Api::V1::FeedbacksController < ApplicationController
   def feedback
     @feedback ||= Feedback.find_by(id: params[:id])
   end
-
-  # def user
-  #   @user ||= User.find(params[:user_id])
-  # end
 
   def filter_params?
     seach_params.present? || order_params? || pagination_params?

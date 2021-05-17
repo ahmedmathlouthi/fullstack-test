@@ -1529,3 +1529,83 @@ Processing by Api::V1::FeedbacksController#create as HTML
 Completed 200 OK in 17ms (Views: 1.9ms | ActiveRecord: 2.8ms | Allocations: 5894)
   [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
   [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/api/v1/feedbacks" for 127.0.0.1 at 2021-05-17 21:23:46 +0200
+Processing by Api::V1::FeedbacksController#index as HTML
+  [1m[36mFeedback Load (0.3ms)[0m  [1m[34mSELECT "feedbacks".* FROM "feedbacks" ORDER BY "feedbacks"."created_at" ASC LIMIT $1[0m  [["LIMIT", 10]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (0.27ms)
+Completed 200 OK in 8ms (Views: 2.0ms | ActiveRecord: 1.4ms | Allocations: 3280)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "feedbacks"[0m
+Started POST "/api/v1/feedbacks?body=Arcesso+aeger+aut.&user%5Bemail%5D=ladonna.franecki%40konopelski-hackett.name&user%5Bfirstname%5D=Kory&user%5Blastname%5D=Schmeler" for 127.0.0.1 at 2021-05-17 21:23:46 +0200
+Processing by Api::V1::FeedbacksController#create as HTML
+  Parameters: {"body"=>"Arcesso aeger aut.", "user"=>{"email"=>"ladonna.franecki@konopelski-hackett.name", "firstname"=>"Kory", "lastname"=>"Schmeler"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ladonna.franecki@konopelski-hackett.name"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ladonna.franecki@konopelski-hackett.name"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("firstname", "lastname", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["firstname", "Kory"], ["lastname", "Schmeler"], ["email", "ladonna.franecki@konopelski-hackett.name"], ["created_at", "2021-05-17 19:23:46.924997"], ["updated_at", "2021-05-17 19:23:46.924997"]]
+  [1m[36mFeedback Create (0.6ms)[0m  [1m[32mINSERT INTO "feedbacks" ("user_id", "body", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", "2df593d1-8fec-48cd-8ae1-e91cb5290b24"], ["body", "Arcesso aeger aut."], ["created_at", "2021-05-17 19:23:46.926853"], ["updated_at", "2021-05-17 19:23:46.926853"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "ladonna.franecki@konopelski-hackett.name"], ["id", "2df593d1-8fec-48cd-8ae1-e91cb5290b24"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered Api::V1::FeedbackSerializer with ActiveModelSerializers::Adapter::JsonApi (1.09ms)
+Completed 200 OK in 27ms (Views: 1.6ms | ActiveRecord: 7.4ms | Allocations: 10231)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "feedbacks"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started POST "/api/v1/feedbacks?body=Surgo+caecus+derelinquo.&user%5Bemail%5D=oliver_dickens%40ankunding.name&user%5Bfirstname%5D=Kemberly&user%5Blastname%5D=Rogahn" for 127.0.0.1 at 2021-05-17 21:23:46 +0200
+Processing by Api::V1::FeedbacksController#create as HTML
+  Parameters: {"body"=>"Surgo caecus derelinquo.", "user"=>{"email"=>"oliver_dickens@ankunding.name", "firstname"=>"Kemberly", "lastname"=>"Rogahn"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "oliver_dickens@ankunding.name"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "oliver_dickens@ankunding.name"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("firstname", "lastname", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["firstname", "Kemberly"], ["lastname", "Rogahn"], ["email", "oliver_dickens@ankunding.name"], ["created_at", "2021-05-17 19:23:46.947252"], ["updated_at", "2021-05-17 19:23:46.947252"]]
+  [1m[36mFeedback Create (0.4ms)[0m  [1m[32mINSERT INTO "feedbacks" ("user_id", "body", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", "76ca3569-7eb4-44d0-89c7-e552381c9c0e"], ["body", "Surgo caecus derelinquo."], ["created_at", "2021-05-17 19:23:46.948756"], ["updated_at", "2021-05-17 19:23:46.948756"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "oliver_dickens@ankunding.name"], ["id", "76ca3569-7eb4-44d0-89c7-e552381c9c0e"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered Api::V1::FeedbackSerializer with ActiveModelSerializers::Adapter::JsonApi (0.58ms)
+Completed 200 OK in 10ms (Views: 1.0ms | ActiveRecord: 2.2ms | Allocations: 2914)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started POST "/api/v1/feedbacks?body=Candidus+repellendus+stultus.&user%5Bemail%5D=test%40test.com&user%5Bfirstname%5D=Bennie&user%5Blastname%5D=Yost" for 127.0.0.1 at 2021-05-17 21:23:46 +0200
+Processing by Api::V1::FeedbacksController#create as HTML
+  Parameters: {"body"=>"Candidus repellendus stultus.", "user"=>{"email"=>"test@test.com", "firstname"=>"Bennie", "lastname"=>"Yost"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@test.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("firstname", "lastname", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["firstname", "Bennie"], ["lastname", "Yost"], ["email", "test@test.com"], ["created_at", "2021-05-17 19:23:46.966726"], ["updated_at", "2021-05-17 19:23:46.966726"]]
+  [1m[36mFeedback Create (0.4ms)[0m  [1m[32mINSERT INTO "feedbacks" ("user_id", "body", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", "9ff02556-857d-4bab-8243-6bc97575b2ff"], ["body", "Candidus repellendus stultus."], ["created_at", "2021-05-17 19:23:46.968359"], ["updated_at", "2021-05-17 19:23:46.968359"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "test@test.com"], ["id", "9ff02556-857d-4bab-8243-6bc97575b2ff"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered Api::V1::FeedbackSerializer with ActiveModelSerializers::Adapter::JsonApi (0.56ms)
+Completed 200 OK in 10ms (Views: 1.0ms | ActiveRecord: 3.0ms | Allocations: 2913)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started POST "/api/v1/feedbacks?body=Candidus+repellendus+stultus.&user%5Bemail%5D=test%40test.com&user%5Bfirstname%5D=Bennie&user%5Blastname%5D=Yost" for 127.0.0.1 at 2021-05-17 21:23:46 +0200
+Processing by Api::V1::FeedbacksController#create as HTML
+  Parameters: {"body"=>"Candidus repellendus stultus.", "user"=>{"email"=>"test@test.com", "firstname"=>"Bennie", "lastname"=>"Yost"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@test.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "test@test.com"], ["id", "9ff02556-857d-4bab-8243-6bc97575b2ff"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFeedback Create (0.4ms)[0m  [1m[32mINSERT INTO "feedbacks" ("user_id", "body", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", "9ff02556-857d-4bab-8243-6bc97575b2ff"], ["body", "Candidus repellendus stultus."], ["created_at", "2021-05-17 19:23:46.984636"], ["updated_at", "2021-05-17 19:23:46.984636"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "test@test.com"], ["id", "9ff02556-857d-4bab-8243-6bc97575b2ff"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[active_model_serializers] Rendered Api::V1::FeedbackSerializer with ActiveModelSerializers::Adapter::JsonApi (0.55ms)
+Completed 200 OK in 10ms (Views: 1.0ms | ActiveRecord: 2.2ms | Allocations: 2833)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m

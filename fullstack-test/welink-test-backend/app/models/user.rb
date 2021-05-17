@@ -5,5 +5,5 @@ class User < ApplicationRecord
 
   validates :firstname, :lastname, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :email, format: { with: /\A(.+)@(.+)\z/, message: 'email is not valid' }
+  validates :email, format: { with: /\A(.+)@(.+)\z/, message: 'not valid' }
 end
