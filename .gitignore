@@ -1,24 +1,24 @@
 # dependencies
-welink-test-frontend/node_modules
-welink-test-frontend/.pnp
-welink-test-frontend/.pnp.js
+fullstack-test/welink-test-frontend/node_modules
+fullstack-test/welink-test-frontend/.pnp
+fullstack-test/welink-test-frontend/.pnp.js
 # testing
-welink-test-frontend/coverage
+fullstack-test/welink-test-frontend/coverage
 # production
-welink-test-frontend//build
+fullstack-test/welink-test-frontend//build
 # misc
-welink-test-frontend/.DS_Store
-welink-test-frontend/.env
-welink-test-frontend/npm-debug.log*
+fullstack-test/welink-test-frontend/.DS_Store
+fullstack-test/welink-test-frontend/.env
+fullstack-test/welink-test-frontend/npm-debug.log*
 
 # Ignore bundler config.
-welink-test-backend/.bundle
+fullstack-test/welink-test-backend/.bundle
 # Ignore all logfiles and tempfiles.
-welink-test-backend/log/*
-welink-test-backend/tmp/*
-welink-test-backend!/log/.keep
-welink-test-backend!/tmp/.keep
+fullstack-test/welink-test-backend/log/*
+fullstack-test/welink-test-backend/tmp/*
+fullstack-test/welink-test-backend!/log/.keep
+fullstack-test/welink-test-backend!/tmp/.keep
 # Ignore uploaded files in development.
-welink-test-backend.byebug_history
+fullstack-test/welink-test-backend.byebug_history
 # Ignore master key for decrypting credentials and more.
-welink-test-backend/config/master.key
+fullstack-test/welink-test-backend/config/master.key
