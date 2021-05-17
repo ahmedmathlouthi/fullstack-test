@@ -37,7 +37,31 @@ You'll have to make a three steps satisfaction form with [Ruby on Rails](https:/
 
 ## Install
 
-You tell me.
+### First of all we start by the backend side
+
+Start by cloning the full project then head to the backend and run these commands
+
+  `cd fullstack-test/welink-test-backend/` \
+  `bundle install` \
+  `rails db:setup` \
+  `rails db:migrate` \
+  `rails s`
+
+The backend project will run automatically on the port `3000`
+
+### Now the Frontend part
+
+After successefully running the server head to the frontend:
+
+  `cd fullstack-test/welink-test-frontend/`
+
+Before running the project you have to set the environment variables in `.env` file which contains the backend api url and frontend port then run these commands:
+
+  `npm install` \
+  `npm start`
+
+Enjoy your app 
+
 
 ## Additional notes
 
